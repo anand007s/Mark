@@ -27,5 +27,5 @@ jobs:
         name: Build and Publish Docker Image
         run: |
           ./mvnw clean package jib:dockerBuild -DskipTests
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} --password-stdin
+          docker login -u ${{ secrets.DOCKER_USERNAME }}  ${{ secrets.DOCKER_PASSWORD }} --password-stdin
           docker push ${{ secrets.DOCKER_USERNAME }}/mark-api
