@@ -129,10 +129,9 @@
 						<image>eclipse-temurin:17-jre-focal</image>
 					</from>
 					<to>
-						<image>hianandhowru/marker-api-jib</image>
+						<image>hianandhowru/mark-api</image>
 						<tags>
 							<tag>latest</tag>
-							<tag>0.0.1</tag>
 						</tags>
 					</to>
 					<container>
