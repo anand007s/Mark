@@ -69,7 +69,7 @@ jobs:
       - name: Tag Docker Image
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
-          IMAGE_ID=$(docker images -q ${DOCKER_USERNAME}/mark-api:latest)
+          IMAGE_ID=$(docker images -q ***/mark-api:latest)
           if [ -z "$IMAGE_ID" ]; then
            echo "Error: Docker image ID not found. Build might have failed."
            exit 1
