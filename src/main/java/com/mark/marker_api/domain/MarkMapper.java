@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 public class MarkMapper {
 
     public MarkDTO toDTO(Mark mark){
-        MarkDTO dto = new MarkDTO();
-        dto.setId(mark.getId());
-        dto.setUrl(mark.getUrl());
-        dto.setTitle(mark.getTitle());
-        dto.setCreatedAt(mark.getCreatedAt());
-        return dto;
+        return new MarkDTO(
+        mark.getId(),
+        mark.getUrl(),
+        mark.getTitle(),
+        mark.getCreatedAt()
+        );
     }
 }

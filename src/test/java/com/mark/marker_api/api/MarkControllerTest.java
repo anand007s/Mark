@@ -11,6 +11,7 @@ import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -18,7 +19,10 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -77,5 +81,22 @@ class MarkControllerTest {
                 .andExpect(jsonPath("$.hasNext", CoreMatchers.equalTo(hasNext)))
                 .andExpect(jsonPath("$.isFirst", CoreMatchers.equalTo(isFirst)))
                 .andExpect(jsonPath("$.isLast", CoreMatchers.equalTo(isLast)));
+    }
+
+    @Test
+    void shouldCreateMarkSuccessfully() throws Exception {
+        this.mvc.perform(
+                post("/api/marks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                    "title": "SivaLabs Blog",
+                                    "url": "https://sivalabs.in"
+                                }
+                        """)
+                )
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", notNullValue()));
+
     }
 }
